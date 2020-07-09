@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Steamv2.Models.FavoriteGames>
+<body style="background-color: #171a21; color: whitesmoke">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.GameType.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.Developer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.DataRelase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.GameType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.Developer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.DataRelase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.Price)
+        </td>
+    </tr>
+}
+
+</table>
+</body>

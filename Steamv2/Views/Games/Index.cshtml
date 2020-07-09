@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<Steamv2.Models.Game>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Games";
+}
+
+<body style="background-color: #171a21; color: whitesmoke">
+    <h2>Games</h2>
+
+    <p>
+        @if (Context.User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Create New", "Create")
+        }
+        |
+        @if (Request.IsAuthenticated)
+        {
+            @Html.ActionLink("Add founds", "AddFounds")
+        }
+
+        @if (Request.IsAuthenticated)
+        {
+            if (ViewBag.CurrentFounds == null)
+            {
+                <h5>Your founds: 0 $</h5>
+            }
+            else
+            {
+                <h5>Your founds: @ViewBag.CurrentFounds $</h5>
+            }
+        }
+    </p>
+
+    @using (Html.BeginForm("Index", "Games", FormMethod.Get))
+    {
+        <p style="color: black">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" style="color: black" />
+        </p>
+    }
+
+    <br />
+
+    <div style="color: gainsboro; font-weight: bold; width: 90%">
+        @foreach (var item in Model)
+        {
+            if (Request.IsAuthenticated)
+            {
+                <div style="background-color: #2b344a; height: 132px">
+                    <a href="Games/Details/@item.Id" style="height: 132px">
+                        <div style="float: left; height: 20px">
+                            <img src="~/Images/@item.Image" style="width: 23%;">
+                        </div>
+                        <div style="text-align: center; color: gainsboro; font-weight: bold; margin-right: 100px;">
+                            <h5 style="text-align: left; font-size: 24px; margin-left: 250px; height: 90px; font-weight: bold">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h5>
+                            <h6 style="text-align: left; font-size: 15px; margin-left: 250px">
+                                @Html.DisplayFor(modelItem => item.GameType.Name),
+                                @Html.DisplayFor(modelItem => item.DataRelase),
+                                @Html.DisplayFor(modelItem => item.Price)$
+                            </h6>
+                        </div>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div style="background-color: #2b344a; height: 132px">
+                    <a style="height: 132px">
+                        <div style="float: left; height: 20px">
+                            <img src="~/Images/@item.Image" style="width: 23%;">
+                        </div>
+                        <div style="text-align: center; color: gainsboro; font-weight: bold; margin-right: 100px;">
+                            <h5 style="text-align: left; font-size: 24px; margin-left: 250px; height: 90px; font-weight: bold">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h5>
+                            <h6 style="text-align: left; font-size: 15px; margin-left: 250px">
+                                @Html.DisplayFor(modelItem => item.GameType.Name),
+                                @Html.DisplayFor(modelItem => item.DataRelase),
+                                @Html.DisplayFor(modelItem => item.Price)$
+                            </h6>
+                        </div>
+                    </a>
+                </div>
+            }
+            if (Context.User.IsInRole("Admin"))
+            {
+                <h6>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </h6>
+            }
+        }
+    </div>
+
+    <br />
+    <br />
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+</body>
+
+
+

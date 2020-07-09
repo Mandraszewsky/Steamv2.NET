@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Steamv2.ViewModels.GamesDateGroup>
+
+@{
+    ViewBag.Title = "Games Body Statistics";
+}
+<body style="background-color: #171a21; color: whitesmoke">
+<h2>Games Body Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Relase Date
+        </th>
+        <th></th>
+        <th>
+            Games
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td></td>
+            <td>
+                @item.GameCount
+            </td>
+        </tr>
+    }
+</table>
+</body>

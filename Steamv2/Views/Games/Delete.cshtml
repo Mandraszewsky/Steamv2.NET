@@ -1,0 +1,73 @@
+﻿@model Steamv2.Models.Game
+
+@{
+    ViewBag.Title = "Delete";
+}
+<body style="background-color: #171a21; color: whitesmoke">
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Game</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GameType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Developer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Developer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataRelase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataRelase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+</body>

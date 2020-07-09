@@ -1,0 +1,10 @@
+﻿@model Int32
+
+
+@if (Request.IsAuthenticated)
+{
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Basket", "Index", "Baskets")</li>
+    <li style="color: orangered">[@Model.ToString()]</li>
+</ul>
+}

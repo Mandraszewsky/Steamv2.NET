@@ -1,0 +1,45 @@
+﻿@model List<Steamv2.Models.AddBasket>
+
+@{
+    ViewBag.Title = "Index";
+}
+<body style="background-color: #171a21; color: whitesmoke">
+<h2>Basket</h2>
+
+<table class="table">
+    <tr>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.Price) $
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.Developer)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<br />
+<h4 style="font-weight: bold">Total amount: @ViewBag.CurrentPrice$</h4>
+@if (ViewBag.FoundsBelowZero)
+{
+    <h4 style="color: red; font-weight: bold">No enough funds to buy it!</h4>
+    <h5 style="color: red; font-weight: bold">you must have funds on our site to be able to buy some stuff</h5>
+}
+else
+{
+    <h4 style="font-weight: bold">@Html.ActionLink("Accept Order", "AcceptOrder")</h4>
+}
+</body>
